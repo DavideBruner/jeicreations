@@ -12,6 +12,7 @@ export enum FontFamily {
   SEVILLANA = '"Sevillana"',
   SHADOWS_INTO_LIGHT = '"Shadows Into Light"',
   RUBIK = '"Rubik"',
+  DANCING = '"Dancing Script"',
 }
 
 const typography: TypographyOptions = {
@@ -20,13 +21,13 @@ const typography: TypographyOptions = {
   htmlFontSize: 16,
   h1: {
     fontWeight: FontWeight.BOLD,
-    fontFamily: FontFamily.SEVILLANA,
+    fontFamily: FontFamily.DANCING,
     fontSize: pxToRem(120),
     lineHeight: pxToRem(120),
   },
   h2: {
     fontWeight: FontWeight.BOLD,
-    fontFamily: FontFamily.SEVILLANA,
+    fontFamily: FontFamily.DANCING,
     fontSize: pxToRem(60),
     lineHeight: pxToRem(60),
   },

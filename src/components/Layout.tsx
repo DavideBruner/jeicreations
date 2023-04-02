@@ -19,7 +19,7 @@ export default function Layout({ children }: Props) {
         <meta name="theme-color" content="#fff" />
       </Head>
       <Navigation />
-      <Hero />
+      <Hero img="/LogoIllustration.png" />
       <main>{children}</main>
       <Footer />
     </Box>

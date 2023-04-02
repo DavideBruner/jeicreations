@@ -1,8 +1,22 @@
-import React, { useState } from 'react'
-import { Collapse, Grid, Box, Typography, List, ListItem, FormControlLabel, Checkbox, Button } from '@material-ui/core';
+import React, { useState } from "react";
+import {
+  Collapse,
+  Grid,
+  Box,
+  Typography,
+  List,
+  ListItem,
+  FormControlLabel,
+  Checkbox,
+  Button,
+} from "@material-ui/core";
 
-
-export default function ProductFilters({ dataSource, updateFilters, selectedFilters, resetFilters }){
+export default function ProductFilters({
+  dataSource,
+  updateFilters,
+  selectedFilters,
+  resetFilters,
+}) {
   const { categories, colors, materials } = dataSource;
   const [open, setOpen] = useState(false);
 
@@ -19,9 +33,12 @@ export default function ProductFilters({ dataSource, updateFilters, selectedFilt
                     <FormControlLabel
                       control={
                         <Checkbox
-                          checked={selectedFilters.category && selectedFilters.category.includes(slug)}
-                          onChange={({ target: { name }}) => {
-                            updateFilters('category', name);
+                          checked={
+                            selectedFilters.category &&
+                            selectedFilters.category.includes(slug)
+                          }
+                          onChange={({ target: { name } }) => {
+                            updateFilters("category", name);
                           }}
                           name={slug}
                           color="primary"
@@ -44,9 +61,12 @@ export default function ProductFilters({ dataSource, updateFilters, selectedFilt
                     <FormControlLabel
                       control={
                         <Checkbox
-                        checked={selectedFilters.colors && selectedFilters.colors.includes(name)}
-                          onChange={({ target: { name }}) => {
-                            updateFilters('colors', name);
+                          checked={
+                            selectedFilters.colors &&
+                            selectedFilters.colors.includes(name)
+                          }
+                          onChange={({ target: { name } }) => {
+                            updateFilters("colors", name);
                           }}
                           name={name}
                           color="primary"
@@ -69,9 +89,12 @@ export default function ProductFilters({ dataSource, updateFilters, selectedFilt
                     <FormControlLabel
                       control={
                         <Checkbox
-                        checked={selectedFilters.materials && selectedFilters.materials.includes(name)}
-                          onChange={({ target: { name }}) => {
-                            updateFilters('materials', name);
+                          checked={
+                            selectedFilters.materials &&
+                            selectedFilters.materials.includes(name)
+                          }
+                          onChange={({ target: { name } }) => {
+                            updateFilters("materials", name);
                           }}
                           name={name}
                           color="primary"
@@ -86,20 +109,19 @@ export default function ProductFilters({ dataSource, updateFilters, selectedFilt
           </Grid>
         </Grid>
 
-        <Box marginBottom={3} >
+        <Box marginBottom={3}>
           <Button
             onClick={() => {
               resetFilters();
-              setOpen(o => !o);
+              setOpen((o) => !o);
             }}
           >
             Reset All
           </Button>
         </Box>
-        
       </Collapse>
-      <Button onClick={() => setOpen(o => !o)}>
-        {!open ? 'Show filters' : 'Close filters'}
+      <Button onClick={() => setOpen((o) => !o)}>
+        {!open ? "Show filters" : "Close filters"}
       </Button>
     </>
   );

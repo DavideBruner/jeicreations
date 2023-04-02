@@ -7,7 +7,7 @@ import TwitterCardMeta from "../../../components/meta/TwitterCardMeta";
 import PostList from "../../../components/PostList";
 import config from "../../../lib/config";
 import { countPosts, listPostContent, PostContent } from "../../../lib/posts";
-import { listTags, TagContent } from "../../../lib/tags";
+import { getTags, TagContent } from "../../../lib/tags";
 
 type Props = {
   posts: PostContent[];
@@ -34,7 +34,7 @@ export default function Page({ posts, tags, pagination, page }: Props) {
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   const page = parseInt(params.page as string);
   const posts = listPostContent(page, config.posts_per_page);
-  const tags = listTags();
+  const tags = getTags();
   const pagination = {
     current: page,
     pages: Math.ceil(countPosts() / config.posts_per_page),

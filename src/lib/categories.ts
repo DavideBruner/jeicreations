@@ -21,6 +21,6 @@ export function getCategory(slug: string) {
   return categoryMap[slug];
 }
 
-export function listCategories(): CategoryContent[] {
+export function getCategories(): CategoryContent[] {
   return categories.categories;
 }

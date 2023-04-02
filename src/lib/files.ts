@@ -17,12 +17,12 @@ export function parseFile(filePath){
   // Read file as string
   const fileContents = fs.readFileSync(filePath, "utf8");
 
-  // Use gray-matter to parse the file metadata
- return matter(fileContents, {
-  engines: {
-    yaml: (s) => yaml.load(s, { schema: yaml.JSON_SCHEMA }) as object,
-  },
-}); 
+    // Use gray-matter to parse the file metadata
+  return matter(fileContents, {
+    engines: {
+      yaml: (s) => yaml.load(s, { schema: yaml.JSON_SCHEMA }) as object,
+    }
+  }); 
 }
 
 export function getFileContent(fileName, directory) {

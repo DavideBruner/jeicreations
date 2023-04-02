@@ -1,59 +1,21 @@
-import Link from "next/link";
 import { useRouter } from "next/router";
-import { makeStyles, Typography } from "@material-ui/core";
-import clsx from 'clsx';
-import PenCircle from "../assets/pen-circle.svg";
+import Image from "next/image";
+import { makeStyles } from "@material-ui/core";
+import CircleLink from "./CircleLink";
+import Logo from "./Logo";
 
 const useStyles = makeStyles({
   nav: {
-    position: 'absolute',
-    padding: '20px',
+    position: "absolute",
+    padding: "20px",
+    display: "flex",
+    justifyContent: "space-between",
+    width: "100%",
   },
   list: {
     margin: 0,
     padding: 0,
     listStyle: "none",
-  },
-  listItem: {
-    margin: "20px",
-    display: "inline-block",
-    cursor: "pointer",
-    zIndex: 1,
-    position: "relative",
-    '&:hover': {
-      '& > $circle': {
-        strokeDasharray: '180px 278px',
-        stroke: "#f4c8e4",
-        transition: 'stroke .25s ease .1s, stroke-dasharray .35s',
-      }
-    },
-  },
-  item: {
-    position: 'relative',
-    zIndex: 2,
-  },
-  active: {
-    '& > $circle': {
-      stroke: "#F2CEAE",
-      strokeDasharray: '180px 278px',  
-      transition: 'stroke .25s ease .1s, stroke-dasharray .35s',
-    }
-  },
-  circle: {
-    width: '100px',
-    height: '55px',
-    position: 'absolute',
-    zIndex: 0,
-    left: '50%',
-    top: '-100%',
-    transform: 'translate(-50%, 7px) translateZ(0)',
-    fill: 'none',
-    stroke: "#f4c8e4",
-    strokeLinecap: "round",
-    strokeWidth: '2px',
-    strokeDasharray: '69px 278px',
-    strokeDashoffset: '361px',
-    transition: 'stroke .25s ease .0s, stroke-dasharray .35s',
   },
 });
 
@@ -63,40 +25,35 @@ export default function Navigation() {
   return (
     <nav className={css.nav}>
       <ul className={css.list}>
-        <li className={clsx(css.listItem, {[css.active]: router.pathname === "/" } )}>
-          <Link href="/" as="/" passHref>
-            <Typography
-              variant="body1"
-              className={css.item}
-            >
-              About
-            </Typography>
-          </Link>
-          <PenCircle className={css.circle}/>
-        </li>
-        <li className={clsx(css.listItem, {[css.active]: router.pathname.startsWith("/products") } )}>
-          <Link href="/products" passHref>
-            <Typography
-              variant="body1"
-              className={css.item}
-            >
-              Products
-            </Typography>
-          </Link>
-          <PenCircle className={css.circle}/>
-        </li>
-        <li className={clsx(css.listItem, {[css.active]: router.pathname.startsWith("/posts") } )}>
-          <Link href="/posts" passHref>
-            <Typography
-              variant="body1"
-              className={css.item}
-            >
-              Posts
-            </Typography>
-          </Link>
-          <PenCircle className={css.circle}/>
-        </li>
+        <CircleLink as="li" path="/" active={router.pathname === "/"}>
+          Jei Creations
+        </CircleLink>
+
+        <CircleLink
+          as="li"
+          path="/products"
+          active={router.pathname.startsWith("/products")}
+        >
+          Products
+        </CircleLink>
+
+        <CircleLink
+          as="li"
+          path="/posts"
+          active={router.pathname.startsWith("/posts")}
+        >
+          Posts
+        </CircleLink>
+
+        <CircleLink
+          as="li"
+          path="/about"
+          active={router.pathname.startsWith("/about")}
+        >
+          About
+        </CircleLink>
       </ul>
+      <Logo />
     </nav>
   );
 }

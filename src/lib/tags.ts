@@ -19,6 +19,6 @@ export function getTag(slug: string) {
   return tagMap[slug];
 }
 
-export function listTags(): TagContent[] {
+export function getTags(): TagContent[] {
   return tags.tags;
 }

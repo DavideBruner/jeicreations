@@ -10,12 +10,12 @@ export type ProductContent = {
   readonly content?: any;
 };
 
-export function fetchProducts(): ProductContent[] {
+export function getProducts(): ProductContent[] {
   return getDirectoryContent("content/products", ".mdx");
 }
 
-export function fetchProduct(slug: string): ProductContent {
-  return fetchProducts().filter((it) => (
+export function getProduct(slug: string): ProductContent {
+  return getProducts().filter((it) => (
     !slug || (it.slug && it.slug.includes(slug))
   ))[0];
 } 

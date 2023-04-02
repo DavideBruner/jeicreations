@@ -1,5 +1,5 @@
 import React from 'react'
-import { Box, Typography } from '@material-ui/core';
+import { Box, Typography, Grid } from '@material-ui/core';
 import { GetStaticProps, GetStaticPaths } from "next";
 import { MdxRemote } from "next-mdx-remote/types";
 import renderToString from "next-mdx-remote/render-to-string";
@@ -14,7 +14,9 @@ import BasicMeta from "../../components/meta/BasicMeta";
 import OpenGraphMeta from "../../components/meta/OpenGraphMeta";
 import TwitterCardMeta from "../../components/meta/TwitterCardMeta";
 
-import { fetchProduct, fetchProducts } from "../../lib/products";
+import { getProduct, getProducts } from "../../lib/products";
+import getDataset from '../../modules/next-data-matter/getDataset';
+import Image from 'next/image'
 
 export type Props = {
   title: string;
@@ -34,16 +36,29 @@ const components = {
   // h2: (props) => <Typography variant="h2" {...props} />
 };
 
-const ProductPage = ({ source }) => {
+const Product = ({ source, title, images }: any) => {
   const content = hydrate(source, { components })
   return (
-    <Box textAlign="center">
-      {content}
+    <Box align="center">
+      <Typography variant='h2'>
+        {title}
+      </Typography>
+      <Grid container justify="center">
+        <Grid item md={6}>
+          {images.map(img => (
+            <Image src={img} height={150} width={300} />
+          ))}
+        </Grid>
+
+        <Grid item md={6}>
+          {content}
+        </Grid>
+      </Grid>
     </Box>
   );
 }
 
-export default function Product({ slug, title, ...props }: Props) {
+export default function ProductPage({ slug, title, ...props }: Props) {
   const url = `/products/${slug}`;
   
   return (
@@ -51,13 +66,14 @@ export default function Product({ slug, title, ...props }: Props) {
       <BasicMeta url={url} title={title} />
       <OpenGraphMeta url={url} title={title} />
       <TwitterCardMeta url={url} title={title} />
-      <ProductPage {...props} />
+      <Product {...props} title={title} />
     </Layout>
   );
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const products = fetchProducts();
+  const [products, { loading, error }] = getDataset('product');
+  // const products = getProducts();
   const paths = products.map(it => "/products/" + it.slug);
   return {
     paths,
@@ -67,7 +83,10 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   const slug = params.product as string;
-  const product = fetchProduct(slug);
+  const [product, { loading, error }] = getDataset('product', {
+    loadByKey: slug,
+  });
+  // const product = getProduct(slug);
   const { content, ...data } = product || { content: "" };
   const source = await renderToString(content, { components, scope: data as any });
   return {
