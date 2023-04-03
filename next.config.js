@@ -1,4 +1,5 @@
 module.exports = {
+  distDir: "dist",
   webpack: (config, { buildId, dev, isServer, defaultLoaders, webpack }) => {
     config.module.rules.push(
       ...[
@@ -14,5 +15,5 @@ module.exports = {
       ]
     );
     return config;
-  }
+  },
 };
