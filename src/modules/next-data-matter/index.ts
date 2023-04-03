@@ -8,7 +8,7 @@
 //   datasets: {
 //     post: {
 //       source: './content/posts',
-//       parser: { 
+//       parser: {
 //         process: ({ fileName, fullPath, fileContents }, options) => {},
 //         normalize: (entry) => ({ })
 //         options: {
@@ -41,3 +41,5 @@
 // const [post, { loading, error }] = getDataset('post', {
 //   loadByKey: 'nice-post',
 // })
+
+export default {};
