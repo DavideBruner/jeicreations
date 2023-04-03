@@ -22,3 +22,7 @@ export function getTag(slug: string) {
 export function getTags(): TagContent[] {
   return tags.tags;
 }
+
+export function listTags(): TagContent[] {
+  return getTags();
+}
